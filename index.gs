@@ -1,35 +1,42 @@
-/**
- * Generates an array of 5 task objects based on the given slug.
- * @param {string} objSlug - A string slug (e.g. "Acquire-High-Paying-Clients").
- * @returns {Array} Array of task objects.
- */
 function generateTasks(objSlug) {
   const currentYear = new Date().getFullYear();
-  const objectiveNumber = 999; // stubbed constant as per instructions
-  const tasks = [];
+  const objectiveNumber = 999;    
   const titles = [
     "Draft ICP Brief",
-    "Conduct Market Research",
-    "Develop Marketing Strategy",
-    "Execute Campaign",
-    "Analyze Results"
+    "Research Market",
+    "Develop Strategy",
+    "Execute Plan",
+    "Review Results"
   ];
-
+  
+  let tasks = [];
+  
   for (let i = 0; i < 5; i++) {
-    const taskId = `OBJ-${currentYear}-${objectiveNumber}-T0${i + 1}`;
-    const title = titles[i];
     
-    // Calculate due date = today + (i * 2) days
-    const dueDate = new Date();
+    let dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + i * 2);
-    const dueDateFormatted = dueDate.toISOString().split('T')[0]; // YYYY-MM-DD format
-
-    tasks.push({
+    
+    
+    let yyyy = dueDate.getFullYear();
+    let mm = ('0' + (dueDate.getMonth() + 1)).slice(-2);
+    let dd = ('0' + dueDate.getDate()).slice(-2);
+    let formattedDate = `${yyyy}-${mm}-${dd}`;
+    
+    
+    let taskId = `OBJ-${currentYear}-${objectiveNumber}-T0${i + 1}`;
+    
+    
+    let task = {
       taskId: taskId,
-      title: title,
-      dueDate: dueDateFormatted
-    });  
+      title: titles[i],
+      dueDate: formattedDate
+    };
+    
+    tasks.push(task);
   }
-
-  return tasks;
+  
+  return tasks;  generateTasks
+function testGenerateTasks() {
+  let result = generateTasks("Acquire-High-Paying-Clients");
+  Logger.log(JSON.stringify(result));
 }
